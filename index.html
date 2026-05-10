@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mango Tracker | MangoBari — Fresh Mango Varieties</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: clean & modern UI/UX -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ----- DESIGN SYSTEM (exact color palette) ----- */
+    :root {
+      --body-bg: #FFF8F0;
+      --card-bg: #FFE8D6;
+      --button-bg: #FF9F1C;
+      --heading-color: #7A3E00;
+      --text-color: #5B4636;
+      --accent-color: #7FB069;
+      --border-light: #f0dbc8;
+      --shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 18px 28px rgba(127, 176, 105, 0.12);
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--body-bg);
+      color: var(--text-color);
+      font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    /* Typography */
+    h1, h2, h3, .logo-text, .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      border-left: 6px solid var(--accent-color);
+      padding-left: 1.2rem;
+      letter-spacing: -0.3px;
+    }
+
+    /* Navbar + Hamburger */
+    .navbar {
+      background: rgba(255, 248, 240, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--heading-color), #b7621a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .logo span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-color);
+      letter-spacing: 0.5px;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--heading-color);
+      transition: var(--transition);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-color);
+      transition: 0.2s;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links li a:hover, .nav-links li a.active {
+      color: var(--accent-color);
+      border-bottom-color: var(--accent-color);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--card-bg);
+      border-radius: 2rem;
+      padding: 2.8rem 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #ffdfc4;
+    }
+    .hero-text {
+      flex: 1.3;
+    }
+    .hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--heading-color);
+      line-height: 1.2;
+    }
+    .hero-badge {
+      background: var(--accent-color);
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 1rem;
+    }
+    .hero-img {
+      flex: 0.9;
+      text-align: center;
+      background: #FFF3e8;
+      border-radius: 2rem;
+      padding: 1rem;
+    }
+    .hero-img img {
+      max-width: 240px;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.08));
+    }
+
+    /* Mango Grid Cards */
+    .mango-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .mango-card {
+      background: var(--card-bg);
+      border-radius: 1.8rem;
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #ffddc0;
+    }
+    .mango-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-color);
+    }
+    .card-img {
+      height: 210px;
+      background: #fff0e2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .card-info {
+      padding: 1.4rem;
+    }
+    .mango-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      color: var(--heading-color);
+    }
+    .price {
+      background: var(--button-bg);
+      padding: 0.2rem 0.8rem;
+      border-radius: 3rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #3e2a1a;
+    }
+    .description {
+      margin: 0.7rem 0;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      line-height: 1.4;
+    }
+    .order-btn {
+      background: var(--button-bg);
+      border: none;
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      color: #4a2a12;
+    }
+    .order-btn:hover {
+      background: #e6871a;
+      color: white;
+      transform: scale(0.98);
+    }
+
+    /* Corporate + About Panels */
+    .corporate-content, .about-content {
+      background: var(--card-bg);
+      border-radius: 2rem;
+      padding: 2rem 2.2rem;
+      border-left: 6px solid var(--accent-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Gallery */
+    .gallery-card {
+      background: var(--card-bg);
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      background: #FFF4EA;
+      border-radius: 2rem;
+      padding: 2rem;
+      border: 1px solid #ffdfc4;
+    }
+    .contact-info {
+      flex: 1;
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      padding: 0.9rem 1.5rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      margin-top: 1.2rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .whatsapp-btn:hover {
+      background: #128C7E;
+      transform: scale(1.02);
+    }
+
+    footer {
+      background: #ffe3d4;
+      text-align: center;
+      padding: 1.8rem;
+      color: var(--text-color);
+      margin-top: 1rem;
+      border-top: 1px solid #ffcfb0;
+    }
+
+    /* Responsive + Hamburger */
+    @media (max-width: 880px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      .hamburger {
+        display: block;
+      }
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: -100%;
+        background: var(--card-bg);
+        width: 70%;
+        height: calc(100vh - 76px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem;
+        gap: 2rem;
+        transition: 0.3s;
+        box-shadow: 6px 0 20px rgba(0,0,0,0.08);
+        border-radius: 0 24px 24px 0;
+        z-index: 999;
+      }
+      .nav-links.active {
+        left: 0;
+      }
+      .nav-links li a {
+        font-size: 1.3rem;
+      }
+      section {
+        padding: 3rem 1.5rem;
+      }
+      .hero-text h2 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 550px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+    button, a {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h1>🥭 Mango Tracker <span>— বাগান থেকে ঘরে</span></h1>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#fruits" class="nav-link">Fruits</a></li>
+        <li><a href="#corporate" class="nav-link">Corporate</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home section -->
+    <section id="home">
+      <div class="hero">
+        <div class="hero-text">
+          <div class="hero-badge"><i class="fas fa-location-dot"></i> Premium Mango Orchard, Bangladesh</div>
+          <h2>আমের বিশাল ভ্যারাইটি<br>ট্র্যাকার ও অর্ডার পোর্টাল</h2>
+          <p>হিমসাগর, ল্যাংড়া, আম্রপালি, ফজলি, গোপালভোগ ও আরো অনেক জাত। বিস্তারিত দাম, ওজন ও স্বাদের তথ্য সহ প্রতিটি আমের বিবরণ। অর্ডার করতে আমাদের হোয়াটসঅ্যাপে যোগাযোগ করুন।</p>
+          <p><i class="fas fa-check-circle" style="color:#7FB069;"></i> প্রতিটি অর্ডারে ট্র্যাকিং আইডি | ১০০% তাজা</p>
+        </div>
+        <div class="hero-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/3460/3460275.png" alt="Fresh Mango">
+          <p style="margin-top: 0.5rem;">🍑 ১৫+ premium varieties</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fruits section (all mango varieties with price, details) -->
+    <section id="fruits">
+      <h2 class="section-title">🍂 আমের সম্ভার & দামের বিবরণ</h2>
+      <div class="mango-grid" id="mangoGrid"></div>
+    </section>
+
+    <!-- Corporate Section -->
+    <section id="corporate">
+      <h2 class="section-title">🏢 করপোরেট অর্ডার ও অংশীদারিত্ব</h2>
+      <div class="corporate-content">
+        <p style="font-size:1.2rem; font-weight:600;"><i class="fas fa-handshake" style="color:#7FB069;"></i> B2B বাল্ক অর্ডার, কাস্টম প্যাকেজিং, ফেস্টিভ হ্যাম্পার</p>
+        <p>আমাদের করপোরেট প্যাকেজ হোটেল, রিসর্ট, অফিস ও বিদেশি ক্রেতাদের জন্য উপযুক্ত। আমের ট্র্যাকিং সুবিধা, ডোরস্টেপ ডেলিভারি এবং ৫০ কেজি+ অর্ডারে বিশেষ ছাড়। কাস্টম লোগো ও ব্র্যান্ডিং সুবিধা উপলব্ধ।</p>
+        <p style="margin-top: 0.6rem;"><i class="fab fa-whatsapp"></i> করপোরেট হটলাইন : <strong>01763685251</strong> (WhatsApp Business)</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">📖 আমাদের গল্প & মিশন</h2>
+      <div class="about-content">
+        <p><strong>Mango Tracker</strong> ২০১২ সাল থেকে আমের কিংবদন্তি চাষ ও ট্র্যাকিং প্রযুক্তি নিয়ে কাজ করছে। আমরা গ্রাহকদের ডিজিটাল ট্র্যাকিং সুবিধা দেই — অর্ডার করার পর কোন অবস্থানে আপনার আম রয়েছে তা জানতে পারেন। সংযুক্ত ৪০+ হেক্টর বাগান, ন্যাচারাল পদ্ধতি।</p>
+        <p>🍃 আমাদের লক্ষ্য: দেশি-বিদেশি সব ধরনের আমের মান সংরক্ষণ করে প্রতিটি গ্রাহকের কাছে পৌঁছে দেওয়া। প্রতিটি ভ্যারাইটির দাম, উৎপত্তি ও পুষ্টিগুণ সাইটে উল্লেখিত আছে।</p>
+        <p><i class="fas fa-seedling" style="color:#7FB069;"></i> সার্টিফাইড অর্গানিক, গ্লোবাল স্ট্যান্ডার্ড।</p>
+      </div>
+    </section>
+
+    <!-- Gallery section -->
+    <section id="gallery">
+      <h2 class="section-title">📸 গ্যালারি — আমাদের আমের আভা</h2>
+      <div class="mango-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- Contact & WhatsApp Number -->
+    <section id="contact">
+      <h2 class="section-title">📞 যোগাযোগ & অর্ডার করুন</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3><i class="fab fa-whatsapp" style="color:#25D366;"></i> হোয়াটসঅ্যাপ অর্ডার ডেস্ক</h3>
+          <p>নীচের বাটনে ক্লিক করে সরাসরি আমাদের হোয়াটসঅ্যাপে অর্ডারের বিবরণ দিন। অথবা স্ক্রল করে পছন্দের আমের কার্ড থেকে অর্ডার করুন।</p>
+          <a href="https://wa.me/8801763685251?text=হ্যালো%20ম্যাঙ্গো%20ট্র্যাকার%2C%20আমি%20আম%20অর্ডার%20করতে%20চাই।%20ভ্যারাইটি%20ও%20মূল্য%20তালিকা%20পাঠান।" target="_blank" class="whatsapp-btn" id="globalWhatsappBtn">
+            <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i> WhatsApp: 01763685251
+          </a>
+          <p style="margin-top: 1rem;"><i class="fas fa-phone-alt"></i> বিকল্প: +8801763685251 (কল ও মেসেজ)</p>
+          <p><i class="fas fa-map-marker-alt"></i> আমবাগান চত্ত্বর, রাজশাহী বিভাগ, বাংলাদেশ</p>
+        </div>
+        <div style="flex:1; background: #FFF1E4; border-radius: 1.5rem; padding: 1.5rem;">
+          <h3>✨ আমাদের অর্ডার প্রক্রিয়া</h3>
+          <ul style="margin-left: 1rem;">
+            <li><i class="fas fa-check-circle" style="color:#7FB069;"></i> যেকোনো আম সিলেক্ট করুন</li>
+            <li><i class="fab fa-whatsapp"></i> অর্ডার বাটনে চাপুন</li>
+            <li><i class="fas fa-user"></i> আপনার নাম, ঠিকানা ও পরিমাণ লিখুন</li>
+            <li><i class="fas fa-truck"></i> ডেলিভারি ট্র্যাকিং আইডি পাবেন</li>
+            <li>পণ্য হাতে পেয়ে পেমেন্ট (ক্যাশ অন ডেলিভারি / মোবাইল ব্যাংকিং)</li>
+          </ul>
+          <div style="background: var(--accent-color); color:white; border-radius: 2rem; padding:0.3rem 1rem; display:inline-block; margin-top:1rem;">⭐ ফ্রি শিপিং ৫+ কেজি অর্ডারে</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>🥭 Mango Tracker — প্রতিটি আমের ভ্যারাইটি, দাম, বিস্তারিত তথ্য ও ট্র্যাকিং সিস্টেম | হোয়াটসঅ্যাপ: 01763685251</p>
+    <p><i class="fas fa-heart" style="color:#FF9F1C;"></i> দেশি আমের আন্তর্জাতিক মান, বাগান থেকে ডেলিভারি</p>
+  </footer>
+
+  <script>
+    // MANGO VARIETIES (অনেক ভ্যারাইটি, দাম ও বিস্তারিত)
+    const mangoVarieties = [
+      { name: "হিমসাগর (Himsagar)", price: "৳ ২৪০ /কেজি", desc: "মিষ্টি সুগন্ধি, আঁশহীন ও রসালো। বাগানের সেরা বিক্রি।", origin: "রাজশাহী", weight: "২০০-৩৫০ গ্রাম", icon: "🥭✨" },
+      { name: "ল্যাংড়া (Langra)", price: "৳ ২০০ /কেজি", desc: "নরম টেক্সচার, টক-মিষ্টি স্বাদের ভারী আম।", origin: "চাঁপাইনবাবগঞ্জ", weight: "১৮০-৩২০ গ্রাম", icon: "🥭🍂" },
+      { name: "আম্রপালি (Amrapali)", price: "৳ ২৮০ /কেজি", desc: "গভর্ণমেন্ট হাইব্রিড, ক্রিমি ও স্বর্গীয় স্বাদ।", origin: "বগুড়া", weight: "২২০-৪০০ গ্রাম", icon: "🥭🧡" },
+      { name: "ফজলি (Fazli)", price: "৳ ১৮৫ /কেজি", desc: "বড় আকার, জুস ও আচারের জন্য পারফেক্ট।", origin: "মালদা", weight: "৩০০-৬৫০ গ্রাম", icon: "🍑🥭" },
+      { name: "গোপালভোগ (Gopalbhog)", price: "৳ ৩২০ /কেজি", desc: "সুবাসিত, সোনালী রঙ ও মাখনের মতো নরম।", origin: "নদীয়া", weight: "১৯০-২৭০ গ্রাম", icon: "🥭👑" },
+      { name: "লক্ষণভোগ (Lakshmanbhog)", price: "৳ ২৯৫ /কেজি", desc: "মিষ্টতা ও সুগন্ধি দ্বিগুণ, প্রতিটি কামড়ে আনন্দ।", origin: "কুষ্টিয়া", weight: "২০০-৩৩০ গ্রাম", icon: "🥭🍯" },
+      { name: "কাটিমন (Katimon)", price: "৳ ২১০ /কেজি", desc: "আঁশযুক্ত লম্বা আম, লম্বা সময় সংরক্ষণযোগ্য।", origin: "দিনাজপুর", weight: "২৫০-৪০০ গ্রাম", icon: "🥭🌾" },
+      { name: "বোম্বাই (Bombai)", price: "৳ ২৬০ /কেজি", desc: "লালচে আভা, মিষ্টি ও আঁশহীন সরস আম।", origin: "চট্টগ্রাম", weight: "২০০-৩৬০ গ্রাম", icon: "🥭🍊" }
+    ];
+
+    // GALLERY items (mango theme)
+    const galleryItems = [
+      { title: "বাগানের ফুল ও আম", emoji: "🌸🥭", desc: "ব্লসম টু হাভেস্ট" },
+      { title: "হিমসাগর প্যাকিং", emoji: "📦🥭", desc: "হাতেবাছাই প্রিমিয়াম লট" },
+      { title: "ফজলি জায়ান্ট", emoji: "🏆🥭", desc: "বৃহদাকার সাইজ" },
+      { title: "অর্গানিক কেয়ার", emoji: "🌿🍑", desc: "রাসায়নিকমুক্ত বাগান" },
+      { title: "ট্র্যাকার ড্যাশবোর্ড", emoji: "📍📊", desc: "অর্ডার স্থিতি জানুন" },
+      { title: "করপোরেট গিফট", emoji: "💼🎁", desc: "হ্যাম্পার প্রস্তুত" }
+    ];
+
+    function renderFruits() {
+      const container = document.getElementById('mangoGrid');
+      if (!container) return;
+      container.innerHTML = '';
+      mangoVarieties.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'mango-card';
+        card.innerHTML = `
+          <div class="card-img">
+            <i class="fas fa-mango" style="font-size: 3.8rem; color:#FF9F1C;"></i> ${m.icon}
+          </div>
+          <div class="card-info">
+            <div class="mango-name">${m.name} <span class="price">${m.price}</span></div>
+            <div class="description"><i class="fas fa-leaf"></i> ${m.desc}</div>
+            <div class="description"><i class="fas fa-map-marker-alt"></i> উৎপত্তি: ${m.origin} | ⚖️ ওজন: ${m.weight}</div>
+            <button class="order-btn" data-name="${m.name}" data-price="${m.price}" data-details="${m.desc}, ${m.origin}, ওজন:${m.weight}"><i class="fab fa-whatsapp"></i> অর্ডার করুন (WhatsApp)</button>
+          </div>
+        `;
+        const btn = card.querySelector('.order-btn');
+        btn.addEventListener('click', () => {
+          const productText = `${m.name} - ${m.price} (${m.desc}, ${m.origin}, ${m.weight})`;
+          const msg = `নমস্কার, আমি Mango Tracker থেকে অর্ডার করতে চাই।\nপণ্য: ${productText}\nঅনুগ্রহ করে ডেলিভারি ও পেমেন্টের বিস্তারিত জানান।`;
+          const whatsappLink = `https://wa.me/8801763685251?text=${encodeURIComponent(msg)}`;
+          window.open(whatsappLink, '_blank');
+        });
+        container.appendChild(card);
+      });
+    }
+
+    function renderGallery() {
+      const galleryContainer = document.getElementById('galleryGrid');
+      if (!galleryContainer) return;
+      galleryContainer.innerHTML = '';
+      galleryItems.forEach(g => {
+        const galCard = document.createElement('div');
+        galCard.className = 'mango-card';
+        galCard.style.cursor = 'pointer';
+        galCard.innerHTML = `
+          <div class="card-img" style="background:#fff2e6; font-size: 3.2rem;">
+            ${g.emoji}
+          </div>
+          <div class="card-info">
+            <h3 style="color:var(--heading-color);">${g.title}</h3>
+            <p>🍃 ${g.desc} — আমাদের সংগ্রহশালা (Mango Gallery)</p>
+          </div>
+        `;
+        galleryContainer.appendChild(galCard);
+      });
+    }
+
+    // Active navigation highlight
+    const sections = document.querySelectorAll('section');
+    const navLinkItems = document.querySelectorAll('.nav-link');
+    function updateActiveLink() {
+      let current = '';
+      const scrollPosition = window.scrollY + 180;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinkItems.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // hamburger toggle logic
+    const hamburger = document.getElementById('hamburger');
+    const navLinksEl = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinksEl.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (navLinksEl.classList.contains('active')) navLinksEl.classList.remove('active');
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSec = document.getElementById(targetId);
+        if (targetSec) {
+          e.preventDefault();
+          window.scrollTo({ top: targetSec.offsetTop - 80, behavior: 'smooth' });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', () => {
+      renderFruits();
+      renderGallery();
+      updateActiveLink();
+      const globalWhatsapp = document.getElementById('globalWhatsappBtn');
+      if (globalWhatsapp) {
+        globalWhatsapp.setAttribute('href', 'https://wa.me/8801763685251?text=হ্যালো%20ম্যাঙ্গো%20ট্র্যাকার%2C%20আমি%20অর্ডার%20করতে%20ইচ্ছুক।');
+      }
+    });
+  </script>
+</body>
+</html>
